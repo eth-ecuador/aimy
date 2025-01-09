@@ -14,6 +14,7 @@ export const config = [
   eslintConfigPrettier,
   ...tseslint.configs.recommended,
   {
+    extends: ['prettier'],
     plugins: {
       turbo: turboPlugin,
     },

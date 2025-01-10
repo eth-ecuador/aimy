@@ -15,11 +15,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import { RegisterSchema } from "@/schemas";
+import { RegisterSchema } from "@repo/schemas";
 import AuthCardWrapper from "./card-wrapper";
 import FormError from "./form-error";
 import FormSucess from "./form-sucess";
-import { login } from "@/actions/login";
 import { useState, useTransition } from "react";
 import { register } from "@/actions/register";
 
@@ -60,7 +59,9 @@ export default function RegisterForm() {
               name="firstName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>First Name</FormLabel>
+                  <FormLabel>
+                    <Label>First Name</Label>
+                  </FormLabel>
                   <FormControl>
                     <Input {...field} placeholder="Jhon" disabled={isPending} />
                   </FormControl>
@@ -73,7 +74,9 @@ export default function RegisterForm() {
               name="lastName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Last Name</FormLabel>
+                  <FormLabel>
+                    <Label>Last Name</Label>
+                  </FormLabel>
                   <FormControl>
                     <Input {...field} placeholder="Doe" disabled={isPending} />
                   </FormControl>

@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import { LoginSchema } from "@/schemas";
+import { LoginSchema } from "@repo/schemas";
 import AuthCardWrapper from "./card-wrapper";
 import FormError from "./form-error";
 import FormSucess from "./form-sucess";

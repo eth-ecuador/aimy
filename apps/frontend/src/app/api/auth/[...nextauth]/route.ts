@@ -48,6 +48,7 @@ const handler = NextAuth({
     signIn: "/auth/login",
     error: "/auth/error",
     signOut: "/auth/logout",
+    newUser: "/auth/new-user",
   },
   callbacks: {
     async session({ session, token }) {

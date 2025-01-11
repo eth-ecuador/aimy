@@ -23,8 +23,9 @@ import { useState, useTransition } from "react";
 import { register } from "@/actions/register";
 
 export default function RegisterForm() {
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
+  const [success, setSuccess] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
@@ -33,13 +34,15 @@ export default function RegisterForm() {
   });
 
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
-    setError(null);
-    setSuccess(null);
+    setSuccess(false);
+    setError(false);
+    setMessage("");
 
     startTransition(() => {
       register(values).then((data) => {
-        setError(data.error);
         setSuccess(data.success);
+        setError(!data.success);
+        setMessage(data.message);
       });
     });
   };
@@ -121,8 +124,8 @@ export default function RegisterForm() {
               </FormItem>
             )}
           />
-          {error && <FormError message={error} />}
-          {success && <FormSucess message={success} />}
+          {error && <FormError message={message} />}
+          {success && <FormSucess message={message} />}
           <Button type="submit" className="w-full" disabled={isPending}>
             Login
           </Button>

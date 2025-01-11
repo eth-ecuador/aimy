@@ -9,6 +9,8 @@ export const LoginSchema = zod.object({
   }),
 });
 
+export type LoginInput = zod.infer<typeof LoginSchema>;
+
 export const RegisterSchema = zod.object({
   email: zod.string().email({
     message: "Email is required",
@@ -23,3 +25,5 @@ export const RegisterSchema = zod.object({
     message: "Last Name is required",
   }),
 });
+
+export type RegisterInput = zod.infer<typeof RegisterSchema>;

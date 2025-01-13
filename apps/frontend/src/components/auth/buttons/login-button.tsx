@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -9,11 +10,7 @@ interface LoginButtonProps {
   asChild?: boolean;
 }
 
-export default function LoginButton({
-  children,
-  mode = "redirect",
-  asChild,
-}: LoginButtonProps) {
+export default function LoginButton({ mode = "redirect" }: LoginButtonProps) {
   const router = useRouter();
 
   const handleClick = () => {
@@ -29,7 +26,7 @@ export default function LoginButton({
 
   return (
     <span className="cursor-pointer" onClick={handleClick}>
-      {children}
+      <Button size="sm">Login</Button>
     </span>
   );
 }

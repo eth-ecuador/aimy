@@ -1,8 +1,7 @@
 import React from "react";
-import { Button } from "../ui/button";
 import Link from "next/link";
 import Logo from "../ui/logo";
-import LoginButton from "../auth/buttons/login-button";
+import AuthButton from "../auth/buttons/auth-button";
 
 export default function Navbar() {
   return (
@@ -43,11 +42,7 @@ export default function Navbar() {
               Contact
             </Link>
           </nav>
-          <LoginButton>
-            <Button size="sm">
-              Login
-            </Button>
-          </LoginButton>
+          <AuthButton />
         </div>
       </div>
     </header>

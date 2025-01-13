@@ -15,5 +15,13 @@
   "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=18"
+  },
+  "resolutions": {
+    "@auth/core": "0.37.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "@auth/core": "0.37.4"
+    }
   }
 }

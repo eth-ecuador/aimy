@@ -12,13 +12,14 @@
   "types": "src/index.ts",
   "scripts": {
     "db:generate": "prisma generate",
-    "db:push": "prisma db push --skip-generate"
+    "db:push": "prisma db push --skip-generate",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^6.2.1",
+    "@prisma/client": "5.12.0",
     "@types/bcrypt": "^5.0.2",
     "bcrypt": "^5.1.1"
   },

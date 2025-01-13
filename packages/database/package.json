@@ -20,13 +20,13 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "5.12.0",
-    "@types/bcrypt": "^5.0.2",
-    "bcrypt": "^5.1.1"
+    "bcryptjs": "^2.4.3"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/schemas": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "prisma": "^6.2.1",
     "typescript": "^5.7.3"

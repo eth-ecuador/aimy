@@ -36,26 +36,6 @@ const authConfig: NextAuthConfig = {
       },
     },
   ],
-  callbacks: {
-    async session({ session, token }) {
-      if (!token.address) {
-        throw new Error("No address found in token");
-      }
-
-      session.user.address = token.address;
-      session.user.id = token.sub as string;
-
-      return session;
-    },
-    async jwt({ token, user }) {
-      if (user) {
-        token.address = user.address;
-        token.sub = user.id;
-      }
-
-      return token;
-    },
-  },
   pages: {
     signIn: "/auth/login",
     signOut: "/auth/signout",

@@ -1,49 +1,48 @@
+// components/layout/navbar.tsx
 import React from "react";
 import Link from "next/link";
-import Logo from "../ui/logo";
+import Logo from "../brand/logo";
 import AuthButton from "../auth/buttons/auth-button";
 
 export default function Navbar() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 shadow-sm">
-      <div className="w-full max-w-7xl mx-auto px-4">
-        <div className="flex justify-between h-14 items-center">
-          <Link href="#" className="flex items-center" prefetch={false}>
-            <Logo />
-            <span className="sr-only">Acme Inc</span>
+    <header className="fixed top-0 left-0 right-0 z-50 h-14 border-b bg-background">
+      <div className="mx-auto flex h-full w-full items-center justify-between px-4">
+        <Link href="/" className="flex items-center" prefetch={false}>
+          <Logo />
+          <span className="sr-only">Acme Inc</span>
+        </Link>
+        <nav className="hidden gap-4 md:flex">
+          <Link
+            href="/"
+            className="text-sm font-medium transition-colors hover:text-primary"
+            prefetch={false}
+          >
+            Home
           </Link>
-          <nav className="hidden md:flex gap-4">
-            <Link
-              href="#"
-              className="font-medium flex items-center text-sm transition-colors hover:underline"
-              prefetch={false}
-            >
-              Home
-            </Link>
-            <Link
-              href="#"
-              className="font-medium flex items-center text-sm transition-colors hover:underline"
-              prefetch={false}
-            >
-              About
-            </Link>
-            <Link
-              href="#"
-              className="font-medium flex items-center text-sm transition-colors hover:underline"
-              prefetch={false}
-            >
-              Services
-            </Link>
-            <Link
-              href="#"
-              className="font-medium flex items-center text-sm transition-colors hover:underline"
-              prefetch={false}
-            >
-              Contact
-            </Link>
-          </nav>
-          <AuthButton />
-        </div>
+          <Link
+            href="/about"
+            className="text-sm font-medium transition-colors hover:text-primary"
+            prefetch={false}
+          >
+            About
+          </Link>
+          <Link
+            href="/services"
+            className="text-sm font-medium transition-colors hover:text-primary"
+            prefetch={false}
+          >
+            Services
+          </Link>
+          <Link
+            href="/contact"
+            className="text-sm font-medium transition-colors hover:text-primary"
+            prefetch={false}
+          >
+            Contact
+          </Link>
+        </nav>
+        <AuthButton />
       </div>
     </header>
   );

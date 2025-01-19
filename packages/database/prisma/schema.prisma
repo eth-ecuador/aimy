@@ -8,16 +8,43 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model User {
-  id            String    @id @default(cuid())
-  firstName     String?
-  lastName      String?
-  email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
-  image         String?
-  password      String?
-  accounts      Account[]
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
 
+enum CategoryType {
+  HOUSING // Rent, Mortgage, Repairs
+  TRANSPORTATION // Car payments, Gas, Public transit
+  FOOD // Groceries, Dining out
+  UTILITIES // Electricity, Water, Internet
+  HEALTHCARE // Medical expenses, Insurance
+  EDUCATION // Tuition, Books, Courses
+  ENTERTAINMENT // Movies, Games, Hobbies
+  SHOPPING // Clothing, Electronics
+  PERSONAL_CARE // Haircuts, Gym
+  INCOME_SALARY // Regular employment
+  INCOME_BUSINESS // Business profits
+  INCOME_INVESTMENT // Dividends, Interest
+  OTHER
+}
+
+enum GoalStatus {
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model User {
+  id          String        @id @default(cuid())
+  wallet      String
+  firstName   String?
+  lastName    String?
+  image       String?
+  accounts    Account[]
+  transaction Transaction[]
+
+  @@unique([wallet])
   @@map("users")
 }
 
@@ -32,11 +59,21 @@ model Account {
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@map("accounts")
+}
+
+model Transaction {
+  id       String          @id @default(cuid())
+  userId   String          @map("user_id")
+  date     DateTime
+  amount   Float
+  type     TransactionType
+  category CategoryType
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

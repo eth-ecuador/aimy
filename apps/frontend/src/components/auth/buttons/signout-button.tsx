@@ -1,6 +1,6 @@
 "use client";
 
-import { signOut } from "@/actions/signout";
+import { signOut } from "@/actions/auth/signout";
 import { Button } from "@/components/ui/button";
 import React from "react";
 

@@ -9,7 +9,6 @@ import { ChartLine, PiggyBank, Wallet } from "lucide-react";
 export default function OverviewPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <DashboardHeader title="Overview" />
       <main className="container mx-auto p-4 md:p-8 space-y-8 flex flex-col justify-center items-center">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           <FinanceCard

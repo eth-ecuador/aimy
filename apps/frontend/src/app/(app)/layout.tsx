@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import Sidebar from "@/components/dashboard/sidebar";
 import AppHeader from "@/components/dashboard/header";
+import DashboardHeader from "@/components/dashboard/header";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +21,10 @@ export default function RootLayout({
         <aside>
           <Sidebar />
         </aside>
-        <div className="w-full min-h-screen">{children}</div>
+        <div className="w-full min-h-screen">
+          <DashboardHeader />
+          {children}
+        </div>
       </div>
     </SidebarProvider>
   );

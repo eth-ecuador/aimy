@@ -1,4 +1,4 @@
-import { getUserByEmail } from "@repo/database";
+import { createUser, getUserByAddress } from "@repo/database";
 import { LoginSchema } from "@repo/schemas";
 import { NextAuthConfig } from "next-auth";
 
@@ -9,8 +9,7 @@ const authConfig: NextAuthConfig = {
       type: "credentials",
       name: "Credentials",
       credentials: {
-        username: { label: "Username", type: "text" },
-        password: { label: "Password", type: "password" },
+        address: { label: "Address", type: "text" },
       },
       async authorize(credentials) {
         const validatedFields = LoginSchema.safeParse(credentials);
@@ -19,26 +18,36 @@ const authConfig: NextAuthConfig = {
           throw new Error("Invalid Fields");
         }
 
-        const { email, password } = validatedFields.data;
+        const { address } = validatedFields.data;
 
-        const user = await getUserByEmail(email);
+        const user = await getUserByAddress(address);
 
-        if (!user || !user.password) {
-          throw new Error("User not found");
+        console.log("user", user);
+        if (user) {
+          return {
+            id: user.id,
+            name: `${user.firstName} ${user.lastName}`,
+            address,
+          };
+        }
+
+        const newUser = await createUser({ address });
+        console.log("new user", newUser);
+        if (!newUser) {
+          throw new Error("Error creating user");
         }
 
         return {
-          id: user.id,
-          name: `${user.firstName} ${user.lastName}`,
-          email: user.email,
-          address: "0x123456789",
+          id: newUser.id,
+          name: `${newUser.firstName} ${newUser.lastName}`,
+          address,
         };
       },
     },
   ],
   pages: {
-    signIn: "/auth/login",
-    signOut: "/auth/signout",
+    signIn: "/login",
+    signOut: "/",
     error: "/auth/error",
     newUser: "/welcome",
   },

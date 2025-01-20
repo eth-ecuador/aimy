@@ -37,14 +37,14 @@ enum GoalStatus {
 
 model User {
   id          String        @id @default(cuid())
-  wallet      String
+  address     String
   firstName   String?
   lastName    String?
   image       String?
   accounts    Account[]
   transaction Transaction[]
 
-  @@unique([wallet])
+  @@unique([address])
   @@map("users")
 }
 
@@ -68,12 +68,12 @@ model Account {
 }
 
 model Transaction {
-  id       String          @id @default(cuid())
-  userId   String          @map("user_id")
-  date     DateTime
-  amount   Float
-  type     TransactionType
-  category CategoryType
+  id        String          @id @default(cuid())
+  userId    String          @map("user_id")
+  amount    Float
+  type      TransactionType
+  category  CategoryType
+  createdAt DateTime        @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

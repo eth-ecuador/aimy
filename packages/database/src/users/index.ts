@@ -1,15 +1,10 @@
-import { RegisterInput } from "@repo/schemas";
+import { CreateUserDTO } from "@repo/schemas";
 import { db } from "../client";
-import bcrypt from "bcryptjs";
 
-const SALT_ROUNDS = 10;
+export async function createUser(data: CreateUserDTO) {
+  const { address } = data;
 
-export async function createUser(data: RegisterInput) {
-  const { email, password, firstName, lastName } = data;
-
-  const existingUser = await getUserByEmail(email);
-
-  const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+  const existingUser = await getUserByAddress(address);
 
   if (existingUser) {
     throw new Error("User already exists!");
@@ -17,27 +12,24 @@ export async function createUser(data: RegisterInput) {
 
   const newUser = await db.user.create({
     data: {
-      email,
-      password: hashedPassword,
-      firstName,
-      lastName,
+      address,
     },
   });
 
   return newUser;
 }
 
-export async function getUserByEmail(email: string) {
+export async function getUserById(id: string) {
   const user = await db.user.findUnique({
-    where: { email },
+    where: { id },
   });
 
   return user;
 }
 
-export async function getUserById(id: string) {
+export async function getUserByAddress(address: string) {
   const user = await db.user.findUnique({
-    where: { id },
+    where: { address },
   });
 
   return user;
